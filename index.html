@@ -9,9 +9,9 @@
 
     <script>
         const units = {
-            "rare": ["RareUnit1", "RareUnit2", "RareUnit3", "RareUnit4", "RareUnit5"],
-            "epic": ["EpicUnit1", "EpicUnit2", "EpicUnit3", "EpicUnit4", "EpicUnit5"],
-            "legendary": ["LegendaryUnit1", "LegendaryUnit2", "LegendaryUnit3"]
+            "rare": ["Unit1", "Unit2", "Unit3"],
+            "epic": ["Unit4", "Unit5", "Unit6"],
+            "legendary": ["Unit7", "Unit8"]
         };
 
         function getRandomUnits(category, count) {
@@ -27,8 +27,7 @@
             };
 
             try {
-            
-                const pat = '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';
+                const pat = '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'; 
 
                 // Fetch the current `banner.json` file
                 const response = await fetch('https://api.github.com/repos/ArceusV2/Banner/contents/banner.json', {
@@ -54,7 +53,7 @@
                 const updateResponse = await fetch('https://api.github.com/repos/ArceusV2/Banner/contents/banner.json', {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `token ${pat}`,
+                        'Authorization': `token  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`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(newContent)
