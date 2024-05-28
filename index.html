@@ -26,25 +26,41 @@
                 "legendary": getRandomUnits("legendary", 2)
             };
 
-            const response = await fetch('https://api.github.com/repos/ArceusV2/Banner/contents/banner.json');
-            const data = await response.json();
-            const sha = data.sha;
+            try {
+                // Fetch the current `banner.json` file
+                const response = await fetch('https://api.github.com/repos/ArceusV2/Banner/contents/banner.json', {
+                    headers: {
+                        'Authorization': 'token YOUR_GITHUB_TOKEN'
+                    }
+                });
+                const data = await response.json();
 
-            await fetch('https://api.github.com/repos/ArceusV2/Banner/contents/banner.json', {
-                method: 'PUT',
-                headers: {
-                    'Authorization': 'token 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',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
+                // Prepare the updated content
+                const newContent = {
                     message: 'Update banner',
                     content: btoa(JSON.stringify(banner)),
-                    sha: sha
-                })
-            })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
+                    sha: data.sha
+                };
+
+                // Send the PUT request to update the file
+                const updateResponse = await fetch('https://api.github.com/repos/ArceusV2/Banner/contents/banner.json', {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': 'token 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',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newContent)
+                });
+
+                if (updateResponse.ok) {
+                    console.log('Banner updated successfully');
+                } else {
+                    const updateError = await updateResponse.json();
+                    console.error('Error updating banner:', updateError);
+                }
+            } catch (error) {
+                console.error('Error fetching or updating banner:', error);
+            }
         }
     </script>
 </body>
