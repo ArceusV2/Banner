@@ -26,11 +26,11 @@
                 "legendary": getRandomUnits("legendary", 2)
             };
 
-            const response = await fetch('https://api.github.com/repos/ArceusV2/anime-adventures-banner/contents/banner.json');
+            const response = await fetch('https://api.github.com/repos/ArceusV2/Banner/contents/banner.json');
             const data = await response.json();
             const sha = data.sha;
 
-            await fetch('https://api.github.com/repos/ArceusV2/anime-adventures-banner/contents/banner.json', {
+            await fetch('https://api.github.com/repos/ArceusV2/Banner/contents/banner.json', {
                 method: 'PUT',
                 headers: {
                     'Authorization': 'token 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',
